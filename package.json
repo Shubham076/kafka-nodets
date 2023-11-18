@@ -1,11 +1,11 @@
 {
-  "name": "kafka-node",
+  "name": "kafka-node-typescript",
   "version": "0.0.1",
   "description": "kafka-node initialised with create-express-typescript-application.",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node ./build/src/index.js",
+    "start": "tsc && node ./build/src/index.js",
     "dev": "ts-node ./src/index.ts",
     "dev:nodemon": "nodemon -w src -e ts,json -x ts-node ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,7 +24,7 @@
     "eslint": "^7.32.0",
     "nodemon": "^2.0.22",
     "ts-node": "^9.1.1",
-    "typescript": "^4.9.5"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -1,9 +1,10 @@
-import express, { Express } from 'express';
+import express, {Express, Router} from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 import config from '../config.json';
-import { getFilesWithKeyword } from './utils/getFilesWithKeyword';
+import { readFilesFromDirectory } from './utils/getFilesWithKeyword';
+import { RouterConfig } from './types/types';
 
 const app: Express = express();
 
@@ -30,9 +31,13 @@ if (process.env.NODE_ENV === 'production' || config.NODE_ENV === 'production') {
  *                               Register all routes
  ***********************************************************************************/
 
-getFilesWithKeyword('router', __dirname + '/app').forEach((file: string) => {
-  const { router } = require(file);
-  app.use('/', router);
+readFilesFromDirectory(__dirname + '/routes').forEach((file: string) => {
+  const routerConfig: RouterConfig = require(file);
+  if (!routerConfig || !routerConfig.router) {
+    console.error(`Router configuration not found in file: ${file}`);
+    return;
+  }
+  app.use(routerConfig.path, routerConfig.router);
 })
 /************************************************************************************
  *                               Express Error Handling

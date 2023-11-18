@@ -1,7 +1,8 @@
 import { Router } from 'express';
+import {RouterConfig} from "../types/types"
 
 // Export module for registering router in express app
-export const router: Router = Router();
+const router: Router = Router()
 
 // Define your routes here
 router.get("/", (req, res) => {
@@ -27,5 +28,10 @@ router.delete("/", (req, res) => {
     message: "DELETE request from sample router"
   });
 });
+
+module.exports = {
+  path: "/",
+  router: router
+} as RouterConfig
 
 

@@ -1,15 +1,17 @@
 import fs from 'fs';
+import path from 'path'
 
-export const getFilesWithKeyword = (keyword: string, folderName: string, files_?: Array<string>) => {
-  files_ = (typeof files_ === 'undefined') ? [] : files_;
-  const files = fs.readdirSync(folderName);
-  for (let i in files) {
-    let name = folderName + '/' + files[i];
-    if (fs.statSync(name).isDirectory()) {
-      getFilesWithKeyword(keyword, name, files_);
-    } else {
-      name.includes(keyword) && files_.push(name);
-    }
+/**
+ * Reads all files from a given directory and returns their paths.
+ * @param {string} dirPath - The path to the directory.
+ * @return {string[]} An array of file paths.
+ */
+export const readFilesFromDirectory = (dirPath: string): string[] => {
+  try {
+      const files = fs.readdirSync(dirPath);
+      return files.map(file => path.join(dirPath, file));
+  } catch (error) {
+      console.error(`Error reading files from directory ${dirPath}:`, error);
+      return [];
   }
-  return files_;
 }
