@@ -1,4 +1,7 @@
-import express, {Express, Router} from 'express';
+// when we import common js module in typescript (following esm) all the properties of objected exported are
+//available as named import as we can see in express example this is because of __importStar method of typescript
+// How to see the method, build this project and open server.js file
+import express, {Express, Request, Response, request} from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';

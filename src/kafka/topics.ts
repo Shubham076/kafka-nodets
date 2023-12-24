@@ -4,10 +4,10 @@ import {EachMessagePayload} from "kafkajs";
 export const topics: Topic[] = [
     {
         name: "test",
-        numPartitions: 3,
-        replicationFactor: 3,
+        numPartitions: 1,
+        replicationFactor: 1,
         consumerGroups: [{
-            groupId: "1",
+            groupId: "one",
             handler: async (payload: EachMessagePayload) => console.log(payload.message),
         }]
     }

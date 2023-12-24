@@ -1,6 +1,6 @@
 import app from './server';
 import config from '../config.json';
-import {kafkaManager} from "./kafka/manger";
+import kafkaManager from "./kafka/manger";
 
 // Start the application by listening to specific port
 const port = Number(process.env.PORT || config.PORT || 8080);
